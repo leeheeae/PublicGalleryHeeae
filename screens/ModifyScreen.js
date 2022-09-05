@@ -8,6 +8,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import IconRightButton from '../components/IconRightButton';
 import {updatePost} from '../lib/posts';
+import events from '../lib/events';
 
 const ModifyScreen = () => {
   const navigation = useNavigation();
@@ -17,6 +18,10 @@ const ModifyScreen = () => {
 
   const onSubmit = useCallback(async () => {
     await updatePost({id: params.id, description});
+    events.emit('updatePost', {
+      postId: params.id,
+      description,
+    });
     navigation.pop();
   }, [navigation, params.id, description]);
 

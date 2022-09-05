@@ -7,7 +7,6 @@ import {
   View,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {getNewerPosts, getOlderPosts, getPosts, PAGE_SIZE} from '../lib/posts';
 import {getUser} from '../lib/users';
 import Avatar from './Avatar';
 import PostGridItem from './PostGridItem';

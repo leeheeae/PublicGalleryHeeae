@@ -4,11 +4,13 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useUserContext} from '../contexts/UserContext';
 import MainTab from './MainTab';
 import {getUser, subscribeAuth} from '../lib/auth';
+import SplashScreen from 'react-native-splash-screen';
 
 import SignInScreen from './SignInScreen';
 import WelcomeScreen from './WelcomeScreen';
 import UploadScreen from './UploadScreen';
 import ModifyScreen from './ModifyScreen';
+import SettingScreen from './SettingScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +23,8 @@ const RootStack = () => {
       // 여기에 등록되는 함수는 사용자 정보가 바뀔때마다 호출
       // 처음 호출될 때 바로 unsubscribe를 해주기 때문에 한번호출된 후에는 더이상 호출되지 않도록 설정
       unsubscribe();
+
+      SplashScreen.hide();
 
       if (!currentUser) {
         return;
@@ -52,6 +56,11 @@ const RootStack = () => {
             name="Modify"
             component={ModifyScreen}
             options={{title: '설명 수정', headerBackTitle: '뒤로가기'}}
+          />
+          <Stack.Screen
+            name="Setting"
+            component={SettingScreen}
+            options={{title: '설명', headerBackTitle: '뒤로가기'}}
           />
         </>
       ) : (

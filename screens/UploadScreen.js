@@ -15,6 +15,7 @@ import {useUserContext} from '../contexts/UserContext';
 import storage from '@react-native-firebase/storage';
 import {v4} from 'uuid';
 import {createPost} from '../lib/posts';
+import events from '../lib/events';
 
 const UploadScreen = () => {
   const route = useRoute();
@@ -48,7 +49,8 @@ const UploadScreen = () => {
     const photoURL = await reference.getDownloadURL();
     await createPost({description, photoURL, user});
 
-    //TODO 포스트 목록 새로고침
+    // 포스트 목록 새로고침
+    events.emit('refresh');
   }, [res, user, description, navigation]);
 
   useEffect(() => {
